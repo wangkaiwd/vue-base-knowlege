@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.在差值表达式中使用 -->
+        {{msg|getUpper}}
+        <!-- 2.在v-bind绑定属性时使用(从2.1.0开始支持) -->
+        <p v-bind:id="msg|getUpper"></p>
+        <!-- 3.过滤器可以串联,前一个过滤器的输出是下一个过滤器的输入 -->
+        {{msg|getUpper|getLower}}
+        <!-- 4.过滤器函数总接收表达式表达式的值作为第一个参数 -->
+        <!-- msg:第一个参数 arg1:第二个参数 arg2:第三个参数 -->
+        {{msg|getUpper("arg1","arg2")}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    msg: "sdfsfdsfd"
+                }
+            },
+            filters: {
+                getUpper: function(value,arg1,arg2){
+                    // 这里的this指的是window
+                    // console.log(this);
+                    return value.toUpperCase();
+                },
+                getLower:function(value){
+                    return value.toLowerCase();
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>

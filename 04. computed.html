@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- computed可以直接当成data里的属性使用 注意调用函数的时候不加括号 -->
+        {{getBirthday}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    // 日期对象的值
+                    birthday: 914228510514
+                }
+            },
+            computed: {
+                // 将日期格式化年 月 日
+                getBirthday: function(){
+                    // 这里的this是当前组件
+                    // console.log(this);
+                    var birth = new Date(this.birthday);
+                    var y = birth.getFullYear();
+                    var m = birth.getMonth();
+                    var d = birth.getDate()+1;
+                    return y +"年"+ m +"月"+ d +"日";
+                }
+            }
+        });
+    </script>
+</body> 
+</html>

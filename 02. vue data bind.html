@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 支持javascript语法 -->
+        {{msg+name}}
+        <!-- 支持计算，函数处理 -->
+        <p>
+            <!-- 三元运算符 -->
+            {{isOk? 1:2}}
+        </p>
+        <!-- 计算 -->
+        <p>我的年龄是:{{age*2}}</p>
+        <!-- 函数 -->
+        <p>随机数：{{parseInt(Math.random()*age)}}</p>
+        <h2>注意：不支持dom对象及dom对象的属性和全局定义的变量或方法</h2>
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    msg:'Hi',
+                    name:'flydragon',
+                    isOk:true,
+                    age:18
+                }
+            }
+        });
+    </script>
+</body>
+</html>

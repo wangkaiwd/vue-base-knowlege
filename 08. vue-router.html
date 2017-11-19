@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用router-link组件来导航 -->
+        <!-- 通过传入`to`属性指定链接 -->
+        <!-- <router-link></router-link>默认会被渲染成一个<a></a> -->
+        <router-link to="/home">首页</router-link>
+        <router-link to="/product">产品介绍</router-link>
+        <!-- 路由出口 -->
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <!-- vue-router是基于vue的，所以要先引入vue -->
+    <script src="./node_modules/vue-router/dist/vue-router.min.js"></script>
+    <script>
+        // 1.定义（路由）组件
+        //   可以从其它文件import进来
+        var home = {template:"<h1>home</h1>"};
+        var product = {template:"<h2>product</h2>"};
+        // 2.创建router实例
+        var router = new VueRouter({
+            // 定义路由
+            routes:[
+                {name:"home",path:"/home",component:home},
+                {name:"product",path:"/product",component:product},
+            ]
+        });
+        // 3.创建和挂载根实例
+        var vm = new Vue({
+            el:"#app",
+            // 通过router配置参数注入路由，
+            // 从而整个应用都有路由功能
+            router //缩写：相当于routes:routes(es6语法)
+        });
+    
+    </script>
+</body>
+</html>
