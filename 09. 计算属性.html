@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{toUpper}}
+        {{toUp()}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        
+        // this.$data == data;
+        // this.$el == el;
+        var vm = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    msg: "sjjfs"
+                }
+            },
+            computed: {
+                // 这里定义的toUpper不再是方法，而是一个属性
+                toUpper:function(){
+                    // 过滤器的this指向是window
+                    // 这里的this是Vue的实例对象vm
+                    return this.msg.toUpperCase();
+                }
+            },
+            methods: {
+                toUp:function(){
+                    // 将结果返回才能在页面显示
+                    return this.msg.toUpperCase();
+                }
+            }
+
+        });
+        // computed依赖data里面的数据，计算属性可以根据data属性源的变化
+        // 进行自动缓存
+        // computed对比methods:
+        //     computed可以进行缓存，只要上面msg不发生改变，计算属性就会
+        //     立即返回之前的计算结果，而不用再次执行函数toUpper，合理的
+        //     使用计算属性可以大大提高效率
+
+        //     每次触发重新渲染时，调用方法将会再次执行函数
+        //     （methods中的方法）  
+    </script>
+</body>
+</html>

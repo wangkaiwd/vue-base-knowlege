@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 内容和俩边的花括号不能有空格，从官网复制代码要小心 -->
+        {{fullName}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    firstName: 'Foo',
+                    lastName: 'Bar'
+                }
+            },
+            computed: {
+                fullName:function(){
+                    // 这里的this指的是vue的实例对象vm
+                    return this.firstName + "" + this.lastName;
+                }
+            }
+        })
+        // 能使用computed的情况下尽量使用computed，可以使用缓存，提高浏览器的
+        // 响应速度
+
+
+        // 侦听器：提供了一个更通用的方法，来响应数据的变化。
+        // 当需要数据变化时执行异步或者开销较大的操作时，这个方式最有用
+
+    </script>
+</body>
+
+</html>

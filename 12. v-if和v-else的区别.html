@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * v-if:（删除和重建dom元素）
+     *  1.确包在切换过程中条件块内的事件监听器和子组件适当的被销毁和重建
+     *  2.v-if有惰性：初始渲染条件为假，什么也不做，知道条件第一个次变为真
+     *    才会开始渲染条件块
+     * v-show：（display：block和display：none之间切换）
+     *  不管初始条件是什么，元素总是会被渲染，并且只是简单的基于css进行切换
+     *
+     * 总结：
+     *  1. v-if有更高的切换开销，v-show有更高的渲染开销
+     *  2. 非常频繁的切换：v-show   运行条件很少改变：v-if
+     *
+      */
+</script>
+</body>
+</html>
