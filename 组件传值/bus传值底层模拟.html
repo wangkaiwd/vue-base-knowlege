@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$emit,$on分析</title>
+</head>
+<body>
+    <script>
+        // 所有name和fn的组合都存储在这个对象里
+        var obj = {
+        };
+        function $on(name,fn) {
+            obj[name] = fn;
+        }
+
+        function $emit(name,data) {
+            // obj[name]的属性值为一个函数
+            var fn = obj[name];
+            // 将data做为参数传给fn
+            fn(data);
+        }
+    </script>
+</body>
+</html>

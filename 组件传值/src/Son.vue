@@ -1,13 +1,14 @@
 <template>
     <div>
         我是Son组件
+        <button @click='hello()'>给父组件传值</button>
     </div>
 </template>
 <script>
     export default {
-        created:function () {
-            this.hello();
-        },
+        // created:function () {
+        //     this.hello();
+        // },
         methods: {
             hello:function(){
                 // 给父组件传递数据，flag:数据名，数据的内容{a:2,b:4}

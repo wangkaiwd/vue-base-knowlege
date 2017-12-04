@@ -5,22 +5,23 @@
     </div>
 </template>
 <script>
-    import bus from "./bus";
-    export default {
-        data:function () {
-            return {
-                msg:""
-            }
-        },
-        created:function () {
-            var _this = this;
-            // 接收Bb传递来的数据
-            bus.$on("toBb",function(data) {
-                _this.msg = data;
-            });
-        }
-    }
+import bus from "./bus";
 
+export default {
+    data: function () {
+        return {
+            msg: ""
+        }
+    },
+    created: function () {
+        console.log(11);
+        // 接收Bb传递来的数据
+        bus.$on("toBb", function (data) {
+            console.log(data);//组件传来的数据
+        });
+    }
+}
+    // bus传值可以在任意俩个组件之间传值，并不一定只能在兄弟元素之间传值
     /**
      * 兄弟组件传值：
      *      通过定义一个公共的Vue实例bus
