@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <home>
+            <h1>I am father</h1>
+        </home>
+    </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        // 组件作用域：
+            // 1.父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用内编译
+        let home = Vue.component('childContent',{
+            template:`<div>
+                <h2>I am children</h2>
+                <slot>只有在没有要分发的内容时才会显示</slot>
+            </div>  
+            `
+        });
+        // 内容分发：组件组合，混合父组件的内容与子组件自己的模板。这个过程称为内容分发
+        let vm = new Vue({
+            data:function() {
+                return {
+                    
+                }
+            },
+            el: "#app",
+            components:{
+                home
+            }
+        });
+    </script>
+</body>
+</html>
