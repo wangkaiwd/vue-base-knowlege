@@ -8,23 +8,37 @@
 </head>
 <body>
     <div id="app">
+        <!-- 除非子组件模板包含至少一个<slot>插口时，才显示父组件的内容 -->
         <home>
-            <h1>I am father</h1>
+            <!-- 在定义的组件里没有嵌套内容的时候会显示slot中的内容(没有指定slot的name属性) -->
+            <h1>I am html</h1>
         </home>
+        <my-component>
+            <ol slot="ol">
+                <li>杭州的冬天好冷</li>
+                <li>想去一个没有冬天的城市</li>
+            </ol>
+            <ul slot="ul">
+                <li>2018/3/1</li>
+                <li>今天周四</li>
+            </ul>
+        </my-component>
+
     </div>
     <script src="./node_modules/vue/dist/vue.min.js"></script>
     <script>
+        // slot插槽：占个位置
         // 组件作用域：
             // 1.父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用内编译
-        let home = Vue.component('childContent',{
+        const home = Vue.component('childContent',{
             template:`<div>
-                <h2>I am children</h2>
+                <h2>I am home</h2>
                 <slot>只有在没有要分发的内容时才会显示</slot>
             </div>  
             `
         });
         // 内容分发：组件组合，混合父组件的内容与子组件自己的模板。这个过程称为内容分发
-        let vm = new Vue({
+        const vm = new Vue({
             data:function() {
                 return {
                     
@@ -32,7 +46,19 @@
             },
             el: "#app",
             components:{
-                home
+                home,
+                'myComponent':{
+                    // 使用slot插槽来占位置，之后用组件中嵌套的内容来替换
+                    // 内容的位置是由子组件决定的
+                    template: `
+                        <div>
+                            <h1>sunseekers(晴窗一扇)</h1>
+                            <p>只要出发，必须到达</p>
+                            <slot name="ul"></slot>
+                            <slot name="ol"></slot>
+                        <div>
+                    `
+                }
             }
         });
     </script>
