@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p class="static" :class="{active:isActive,'text-danger':hasError}">
+      v-bind:class(在这里也可以简写)也可以与普通的class指定共存
+    </p>
+    <h2 :class="classObj">绑定一个对象作为类</h2>
+    <!-- 这里的classObject是一个计算属性 -->
+    <h2 :class="classObject">返回一个绑定对象的计算属性</h2>
+    <!-- 使用场景：一个类始终存在，另一个类动态添加 -->
+    <h3 :class="[hasError, {active:isActive}]">数组语法和对象语法的综合运用</h3>
+    <h4 :class="[isActive ? active : '',hasError]">三元运算符比较复杂</h4>
+    <hr />
+    <h1>在自定义组件上使用class属性时，这些类将被添加到该组件的根元素上面，根元素已经存在的类不会被覆盖</h1>
+    <div class="todo-box" v-for="todo in todos">
+      <todo-item class="baz boo" :todo="todo" />
+    </div>
+    html将会渲染为（用:class绑定也一样）
+    <p class="foo bar baz boo">添加到对应组件的类将会以多类名的形式添加到组件对应的根元素下边</p>
+    <i :style="styleObj">也可以以对象形式绑定style</i>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: `<li class="foo bar">这是一个待办事项:{{todo.text}}</li>`
+    });
+    var obj = { a: 1 }
+    var vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+          msg: 'hello world',
+          todos: [
+            { id: 0, text: '蔬菜' },
+            { id: 1, text: '奶酪' },
+            { id: 2, text: '随便其它什么人吃的东西' }
+          ],
+          isActive: true,
+          hasError: true,
+          classObj: {
+            active: true,
+            'text-danger': true,
+          },
+          styleObj: {
+            backgroundColor: 'red',
+            color: 'yellow',
+          }
+        }
+      },
+      // 计算属性是基于它们的依赖进行缓存的，计算属性只有在它的相关依赖发生改变时才会重新求值
+      computed: {
+        // 计算属性的getter
+        reverseMessage() {
+          return this.msg.split("").reverse().join("");
+        },
+        classObject() {
+          // 可以根据业务逻辑进行复杂的判断
+          return {
+            // &&运算：expr1 && expr2 如果expr1能转换成false,直接返回expr1,否则返回expr2。
+            // ||运算：expr1 || expr2 如果expr1能转换为true,直接返回expr1,否则返回expr2
+            // 这是一个短路运算
+            active: this.isActive && !this.hasError,
+            hasError: this.isActive || !this.hasError,
+          }
+        }
+      }
+      // data() {
+      //   return {
+      //     msg: '信息',
+      //     obj: obj,
+      // todos: [
+      //   { id: 0, text: '蔬菜' },
+      //   { id: 1, text: '奶酪' },
+      //   { id: 2, text: '随便其它什么人吃的东西' }
+      // ]
+      //   }
+      // }
+    })
+  </script>
+</body>
+
+</html>

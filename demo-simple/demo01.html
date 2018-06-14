@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>用key管理可复用的元素</h1>
+    <!-- 在<template>元素上使用v-if条件渲染分组 -->
+    把template当做不可见的包裹元素，仅仅是因为v-if需要添加在一个元素上面，此处如果用div的话可能会破坏布局 这里相当于react16.3新增的属性Fragments
+    <!-- 
+        < v-if="msg">
+          <h4>title</h4>
+          <p>paragraph 1</p>
+        <>
+          < v-else>
+          <p>paragraph 2</p>
+        <>
+    -->
+    template只是起包裹作用
+    <template v-if="msg">
+      <h4>title</h4>
+      <p>paragraph 1</p>
+    </template>
+    <template v-else>
+      <p>paragraph 2</p>
+    </template>
+    如果不加对应的key值得话，在切换对应的内容时会由于复用已有的input而导致里边输入的内容还在 应该为每一个Input加对应的Key来告诉vue，这俩个input是不同的，要重新渲染。
+    <hr />
+    <template v-if="loginType === 'username'">
+      <label for="">Username</label>
+      <input type="text" key="username" placeholder="Enter your username">
+    </template>
+    <template v-else>
+      <label for="">Email</label>
+      <input type="text" key="address" placeholder="Enter your email address">
+    </template>
+    <br />
+    <button @click="toggle">toggle loginType</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: '123',
+          loginType: '',
+          isUsername: false,
+        }
+      },
+      methods: {
+        toggle() {
+          this.isUsername = !this.isUsername;
+          // 这里要进行赋值而不是进行比较相等性
+          this.isUsername ? this.loginType = 'username' : this.loginType = '';
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
