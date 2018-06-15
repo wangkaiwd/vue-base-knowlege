@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 如果遍历的元素是数组的话接收俩个参数：1.数组的每一项，2.数组的索引 -->
+    <h2>数组</h2>
+    <ul v-for="(k, i)in items">
+      <li :key="i">{{k.message}}</li>
+    </ul>
+    <h2>对象</h2>
+    <!-- 如果遍历的元素是对象的话接收三个参数：1.对象的每一项的键名对应的内容，2.对象的每一项的键名，3.每一项的索引 -->
+    <ul v-for="(val,key,i) in object">
+      <li :key="i">{{val}}--{{key}}--{{i}}</li>
+    </ul>
+    暂时的疑问：react如何通过遍历，将对象的每一项的内容展示出来
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          parentMessage: 'Parent',
+          items: [
+            { message: 'Foo' },
+            { message: 'Bar' }
+          ],
+          object: {
+            firstName: 'John',
+            lastName: 'Doe',
+            age: 30
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
