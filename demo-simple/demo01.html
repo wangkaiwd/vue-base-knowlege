@@ -32,13 +32,14 @@
     </template>
     如果不加对应的key值得话，在切换对应的内容时会由于复用已有的input而导致里边输入的内容还在 应该为每一个Input加对应的Key来告诉vue，这俩个input是不同的，要重新渲染。
     <hr />
+    <h3>没有加key来进行区分：vue会尽可能高效的渲染元素，通常会复用已有元素而不是重新渲染</h3>
     <template v-if="loginType === 'username'">
       <label for="">Username</label>
-      <input type="text" key="username" placeholder="Enter your username">
+      <input type="text" placeholder="Enter your username">
     </template>
     <template v-else>
       <label for="">Email</label>
-      <input type="text" key="address" placeholder="Enter your email address">
+      <input type="text" placeholder="Enter your email address">
     </template>
     <br />
     <button @click="toggle">toggle loginType</button>
