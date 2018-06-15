@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 由于进行双向数据绑定，所以data中返回的count也会发生变化，从而导致数值一直在增加 -->
+    <h2>
+      <i>我们可以将组件进行任意次的复用</i>
+    </h2>
+    <h2 style="backgroundColor:red">
+      <u>每个组件</u>
+    </h2>
+    <button-counter></button-counter>
+    <br />
+    <button-counter></button-counter>
+    <br />
+    <button-counter></button-counter>
+    <br />
+    <button-counter></button-counter>
+    <br />
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // 注册一个全局组件
+    Vue.component('button-counter', {
+      data: function () {
+        return {
+          count: 0,
+        }
+      },
+      template: '<button v-on:click="count++">You click me {{count}} times</button>'
+    })
+    new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+
+</html>

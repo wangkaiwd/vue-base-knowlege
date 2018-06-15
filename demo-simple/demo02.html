@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 通过属性选择器将html中带有v-cloak属性的元素进行一个隐藏 */
+
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 在vue进行过模板替换之前id为app的div会有v-cloak属性，替换完成之后，v-cloak属性隐藏 -->
+  <!-- 项目中直接添加到根元素下面就可以 -->
+  <div id="app" v-cloak>
+    <h3>
+      v-for的优先级要比v-if更高，意味着：v-if将分别重复运行在循环的每一项中 可以在循环时进行判断，实现按条件渲染
+    </h3>
+    <ul v-for="(item,i) in items" v-if="!item.bool">
+      <li :key="i">{{item.message}}</li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // 在页面初次渲染的时候，页面并没有new Vue，所以页面展示的是html模板，并没有经过vue进行一个解析
+    // 模板中的字符串并没有进行替换
+    setTimeout(() => {
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            items: [
+              { message: 'Foo', bool: true },
+              { message: 'Bar', bool: false },
+              { message: 'abc', bool: false },
+            ],
+          }
+        }
+      })
+    }, 2000)
+  </script>
+</body>
+
+</html>
