@@ -8,6 +8,7 @@
 
 ## 知识点记录
 1. 翻转字符串：`str.split("").reverse().join("")`
+2. `watch`,`computed`,'methods'的区别
 
 ## 疑惑点
 1. 当`vue`组件中的`data`并没有通过一个函数返回对象时，`data`中的变量将影响到全部该组件（如何进行演示）
