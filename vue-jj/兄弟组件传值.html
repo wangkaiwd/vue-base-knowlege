@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <child content="Dell"></child>
+    <child content="Lee"></child>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.prototype.bus = new Vue();
+    // 定义一个全局组件
+    Vue.component('child', {
+      props: {
+        content: String,
+      },
+      data() {
+        return {
+          self_content: this.content,
+        }
+      },
+      mounted() {
+        // 回调函数的this指向如何确定？
+        // this.bus.$on('change', function (msg) {
+        //   // 这里的this已经发生了变化，并没有指向当前的Vue实例
+        //   // 这里到底指向谁？这里的this怎么理解
+        //   // console.log('msg', msg);
+        //   // console.log(this);
+        //   // this.content = msg; // 不会生效
+        // })
+
+        // 解决方法1: bind绑定
+        // function getValue(msg) {
+        //   this.self_content = msg;
+        // }
+        // this.bus.$on('change', getValue.bind(this))
+        // 解决方法2: 箭头函数
+        this.bus.$on('change', () => {
+          this.self_content = msg;
+        })
+      },
+      methods: {
+        handleClick() {
+          this.bus.$emit('change', this.self_content)
+        }
+      },
+      template: '<p @click="handleClick">{{self_content}}</p>'
+    })
+    const vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+
+        }
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>

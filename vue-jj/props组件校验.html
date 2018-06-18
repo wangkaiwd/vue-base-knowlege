@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <child content="haaaa"></child>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('child', {
+      // props:['content'],
+      // 对props进行一个校验
+      props: {
+        // 传入的content是一个字符串类型或数字类型
+        // content: [String, Number],
+        // 更为复杂的配置
+        content: {
+          type: String,
+          required: false,
+          default: 'default Value',
+          validator(value) {
+            return value.length >= 5;
+          }
+        }
+      },
+      template: "<div>{{content}}</div>"
+    })
+    const vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+
+        }
+      }
+    })
+    // prop特性: 定义的属性不会在标签中显示
+    // 非prop特性：(子组件并没有接收父组件传递的参数)
+    //    1. 对应的属性会显示到标签中
+    //    2. 子组件由于没有接收，无法使用该参数
+  </script>
+</body>
+
+</html>
