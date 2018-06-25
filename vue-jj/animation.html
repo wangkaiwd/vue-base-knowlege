@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0)
+      }
+      50% {
+        transform: scale(1.5)
+      }
+      100% {
+        transform: scale(1)
+      }
+    }
+
+    /* .fade-enter-active,
+    .fade-leave-active {
+      transform-origin: left center;
+    }
+
+    .fade-enter-active {
+      animation: bounce-in 1s;
+    }
+
+    .fade-leave-active {
+      animation: bounce-in 1s reverse;
+    } */
+
+    .active,
+    .leave {
+      transform-origin: left center;
+    }
+
+    .active {
+      animation: bounce-in 1s;
+    }
+
+    .leave {
+      animation: bounce-in 1s reverse;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 也可以自己定义对应的class -->
+    <transition name="fade" enter-active-class="active" leave-active-class="leave">
+      <h2 v-if="isShow">hello world</h2>
+    </transition>
+    <!-- <transition name="fade">
+      <h4 v-show="isShow">hello</h4>
+    </transition> -->
+    <button @click="isShow=!isShow">消失</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          isShow: true,
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <child>
+      <template slot-scope="props">
+        <h1>{{props.item}}</h1>
+      </template>
+    </child>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('child', {
+      template: `<div>
+                  <slot 
+                    v-for="k in list"
+                    :item="k"
+                  >
+                    暂无内容
+                  </slot>          
+                </div>`,
+      data() {
+        return {
+          list: [1, 2, 3, 4]
+        }
+      },
+      methods: {
+
+      }
+    })
+    const vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

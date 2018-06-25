@@ -1,59 +1,45 @@
 <template>
   <div>
     hello world
-    <p :title="msg">
-      鼠标悬停几秒钟查看此处动态绑定的提示信息
-    </p>
-    <!-- <todo-item></todo-item> -->
-    <p>
-    Ask a yes/no question:
-    <input v-model="question">
-  </p>
-  <p>{{ answer }}</p>
+    <div
+      class="blog-font"
+      :style="{fontSize:postFontSize+'em'}"
+    >
+      <!-- 在自定义组件中通过v-on来监听子组件中通过$emit()定义的方法 -->
+      <Title
+        v-for="post in posts"
+        :postTitle="post"
+        :key="post.id"
+        :toBig="toBig"
+        @textTobig="postFontSize += $event"
+      >
+      </Title>
+    </div>
   </div>
 </template>
 
 <script>
+import Title from "./sub/Title.vue";
 export default {
   data() {
     return {
-      msg: `页面加载于${new Date().toLocaleString()}`,
-      question: "",
-      answer: "I cannot give you an answer until you ask a question!"
+      posts: [
+        { id: 1, title: "My journey with Vue" },
+        { id: 2, title: "Blogging with Vue" },
+        { id: 3, title: "Why Vue is so fun" }
+      ],
+      postFontSize: 1
     };
   },
-  watch: {
-    // 如果 `question` 发生改变，这个函数就会运行
-    question: function(newQuestion, oldQuestion) {
-      this.answer = "Waiting for you to stop typing...";
-      this.debouncedGetAnswer();
-    }
-  },
-  created: function() {
-    // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
-    // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
-    // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
-    // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
-    // 请参考：https://lodash.com/docs#debounce
-    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500);
+  components: {
+    Title
   },
   methods: {
-    getAnswer: function() {
-      if (this.question.indexOf("?") === -1) {
-        this.answer = "Questions usually contain a question mark. ;-)";
-        return;
-      }
-      this.answer = "Thinking...";
-      var vm = this;
-      axios
-        .get("https://yesno.wtf/api")
-        .then(function(response) {
-          vm.answer = _.capitalize(response.data.answer);
-        })
-        .catch(function(error) {
-          vm.answer = "Error! Could not reach the API. " + error;
-        });
-    }
+    toBig(num) {
+      this.postFontSize += num;
+    },
+    // 如果绑定的是一个函数的话，怎么访问$event
+    textTobig() {}
   }
 };
 </script>

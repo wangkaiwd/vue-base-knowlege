@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <button class="btn">diji</button>
+  </div>
+  <script>
+    var actived = '';
+    var btn = document.getElementsByClassName('btn')[0];
+    // btn.addEventListener('click', () => {
+    //   actived = actived === '' ? 'actived' : '';
+    //   console.log('object', actived);
+    // })
+    // onclick:注意原生是小写
+    btn.onclick = function () {
+      // actived = actived === '' ? 'actived' : '';
+      actived = actived === '' ? 'actived' : '';
+      console.log('object', actived);
+    }
+  </script>
+</body>
+
+</html>

@@ -14,11 +14,14 @@
     <h2>
       <i>我们可以将组件进行任意次的复用</i>
     </h2>
-    <!-- style在不绑定动态数据的时候，还是按照行内样式进行书写，当用到动态数据 -->
-    <h2 style="backgroundColor:red">
-      <u>每个组件</u>
+    <!-- 可以是驼峰，也可以是普通写法 -->
+    <h2 style="background-color:red">
+      <u>每个组件都是新的实例，所以每个组件中count都是独立的</u>
     </h2>
-    <button-counter></button-counter>
+    <!-- 当以这种形式定义组件的时候，hmtl对大小写不敏感 -->
+    <!-- <button-counter posTitle="hello"></button-counter> -->
+    <!-- 要使用这种短横线形式进行命名 -->
+    <button-counter post-title="hello"></button-counter>
     <br />
     <button-counter></button-counter>
     <br />
@@ -31,12 +34,21 @@
   <script>
     // 注册一个全局组件
     Vue.component('button-counter', {
+      // 一个组件的data必须是一个函数，这样每个实例可以维护一份被返回对象的独立的拷贝
       data: function () {
         return {
           count: 0,
         }
       },
-      template: '<button v-on:click="count++">You click me {{count}} times</button>'
+      props: ['postTitle'],
+      // 如何何实现公用一个count
+      // data: {
+      //   count: 0,
+      // },
+      template: '<button v-on:click="count++">You click me {{count}} times</button>',
+      created() {
+        console.log('object', this.postTitle);
+      }
     })
     new Vue({
       el: '#app',

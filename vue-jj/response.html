@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <ul class="array">
+      <li v-for="k in array" :key="k.id">{{k.title}}</li>
+    </ul>
+    <ul class="object">
+      <li v-for="k in object">{{k}}</li>
+    </ul>
+
+    <button @click="addArray">新增array</button>
+    <button @click="addObject">新增object</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+          array: [
+            { id: 1, title: 'A' },
+            { id: 2, title: 'B' },
+            { id: 3, title: 'C' },
+          ],
+          object: {
+            name: "小明",
+            age: 18,
+            sex: '男'
+          }
+        }
+      },
+      methods: {
+        /**
+        * vue不能检测到对象属性的添加或删除
+        *   Vue会在初始化实例时对属性执行getter/setter转化过程，
+        *   所以属性必须在data对象上存在才能让Vue转换它，这样才能让它是响应的
+        */
+        addArray() {
+          // 不会生效
+          // this.array.length = 1;
+
+          // 这样才会生效,新增数组的时候可以用push方法
+          this.$set(this.array, 3, { id: '4', title: 'D' });
+        },
+        addObject() {
+          // 不会生效
+          // this.object.dd = '喵喵';
+          // 但是新增对象内容的时候就必须通过this.$set方法
+          // delete this.object.name 删除属性  this.object.aa = 'bb' 新增属性  这样都不会生效
+          this.$set(this.object, 'height', '180cm');
+        },
+      }
+    })
+  </script>
+</body>
+
+</html>

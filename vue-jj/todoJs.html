@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="container">
+    <form action="">
+      <input type="text">
+      <button>add</button>
+      <ul>
+      </ul>
+    </form>
+  </div>
+  <script>
+    const inp = document.getElementsByTagName('input')[0];
+    const form = document.getElementsByTagName('form')[0];
+    const ul = document.querySelector('ul');
+    form.addEventListener('submit', (e) => {
+      // 阻止浏览其的默认行为（提交表单会刷新页面）
+      e.preventDefault();
+      // console.dir(inp);
+      const li = document.createElement('li');
+      li.innerText = inp.value;
+      inp.value = '';
+      ul.appendChild(li);
+    })
+  </script>
+</body>
+
+</html>
