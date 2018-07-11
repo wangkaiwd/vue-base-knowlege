@@ -43,28 +43,28 @@
       <button @submit="addList">add</button>
       ```
     3. 写一个简单版`todos`在提交输入框中的内容时可以通过回车和按钮实现的2种方式：
-      ```html
-      1. click+keyup
-      <div id="app" v-cloak>
-        <!-- 如果触发keyup的按键是enter键时触发事件 -->
-        <input @keyup.enter="addList" v-model="task" type="text">
-        <button @click="addList">add</button>
-        <ul>
-          <!-- 给循环的内容绑定v-for -->
-          <li v-for="(todo,i) in todos" :key="i">{{todo}}</li>
-        </ul>
-      </div>
-
-      2. submit
-      <div id="app" v-cloak>
-        <!-- 当然，这里要阻止浏览器的默认事件，防止表单的自动提交刷新页面 -->
-        <form @submit.prevent="addList">
-          <input v-model="task" type="text">
-          <button>add</button>
+        ```html
+        1. click+keyup
+        <div id="app" v-cloak>
+          <!-- 如果触发keyup的按键是enter键时触发事件 -->
+          <input @keyup.enter="addList" v-model="task" type="text">
+          <button @click="addList">add</button>
           <ul>
             <!-- 给循环的内容绑定v-for -->
             <li v-for="(todo,i) in todos" :key="i">{{todo}}</li>
           </ul>
-        </form>
-      </div>
-      ```
+        </div>
+
+        2. submit
+        <div id="app" v-cloak>
+          <!-- 当然，这里要阻止浏览器的默认事件，防止表单的自动提交刷新页面 -->
+          <form @submit.prevent="addList">
+            <input v-model="task" type="text">
+            <button>add</button>
+            <ul>
+              <!-- 给循环的内容绑定v-for -->
+              <li v-for="(todo,i) in todos" :key="i">{{todo}}</li>
+            </ul>
+          </form>
+        </div>
+        ```
